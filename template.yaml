@@ -14,7 +14,7 @@ Resources:
   MyWebsite:
     Type: AWS::S3::Bucket
     Properties:
-      AccessControl: PublickRead
+      AccessControl: PublicRead
       WebsiteConfiguration: 
         IndexDocument: index.html
       BucketName: resume-project-bucket
