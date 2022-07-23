@@ -18,7 +18,23 @@ Resources:
       WebsiteConfiguration: 
         IndexDocument: index.html
       BucketName: resume-project-bucket
-  
+  MyDistribution:
+    Type: "AWS::CloudFront::Distribution"
+    Properties:
+      DistributionConfig:
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: allow-all
+          TargetOriginId: resume-project-bucket.s3-website.eu-central-1.amazonaws.com
+          ForwardedValues:
+            QueryString: false
+        Origins:
+          - DomainName: resume-project-bucket.s3-website.eu-central-1.amazonaws.com
+            Id: resume-project-bucket.s3-website.eu-central-1.amazonaws.com
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+        Enabled: "true"
+        DefaultRootObject: index.html
+
   BucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
@@ -44,7 +60,7 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.9
       Metadata:
-        BuildMethod: makefile
+      BuildMethod: makefile
       Architectures:
         - x86_64
       Events:
