@@ -43,6 +43,8 @@ Resources:
       CodeUri: hello_world/
       Handler: app.lambda_handler
       Runtime: python3.9
+      Metadata:
+        BuildMethod: makefile
       Architectures:
         - x86_64
       Events:
